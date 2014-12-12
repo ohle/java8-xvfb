@@ -1,6 +1,10 @@
 FROM ubuntu:14.04
 MAINTAINER Florian Schrag <florian@schrag.org>
 
+RUN apt-get update -y
+RUN apt-get install -y xvfb
+
+ENV DISPLAY :99
 
 # Install Java.
 RUN \
@@ -10,13 +14,7 @@ RUN \
   apt-get install -y oracle-java8-installer && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
-
-
-RUN apt-get update -y
-RUN apt-get install -y xvfb
-
-ENV DISPLAY :99
-
+  
 # Install Xvfb init script
 ADD xvfb_init /etc/init.d/xvfb
 RUN chmod a+x /etc/init.d/xvfb
