@@ -10,7 +10,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update
 
 
 # install xvfb
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb libxrender1
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb libxrender1 libxtst6
 
 ENV DISPLAY :99
 
