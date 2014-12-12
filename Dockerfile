@@ -2,15 +2,15 @@ FROM ubuntu:trusty
 MAINTAINER Florian Schrag <florian@schrag.org>
 
 # add additional repo
-RUN apt-get update
-RUN apt-get -y dist-upgrade
-RUN apt-get -y install software-properties-common
-RUN add-apt-repository -y ppa:webupd8team/java
-RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
+RUN DEBIAN_FRONTEND=noninteractive add-apt-repository -y ppa:webupd8team/java
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
 
 
 # install xvfb
-RUN apt-get install -y xvfb libxrender1
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb libxrender1
 
 ENV DISPLAY :99
 
@@ -21,9 +21,8 @@ ADD xvfb-daemon-run /usr/bin/xvfb-daemon-run
 RUN chmod a+x /usr/bin/xvfb-daemon-run
 
 # Install Java.
-RUN \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  apt-get install -y oracle-java8-installer
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y oracle-java8-installer
   
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
