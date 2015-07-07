@@ -1,4 +1,4 @@
-FROM dockerfile/java:oracle-java8
+FROM dockerfile/java:8-jre
 MAINTAINER Florian Schrag <florian@schrag.org>
 
 # add additional repo
