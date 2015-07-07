@@ -1,4 +1,4 @@
-FROM dockerfile/java:8-jre
+FROM java:8-jdk
 MAINTAINER Florian Schrag <florian@schrag.org>
 
 # add additional repo
