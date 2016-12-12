@@ -1,18 +1,14 @@
-FROM java:8-jdk
+FROM openjdk:8-alpine
 MAINTAINER Florian Schrag <florian@schrag.org>
 
 # add additional repo
-RUN apt-get update && apt-get install -y xvfb libxrender1 libxtst6 libxi6
+RUN apk update -q && apk add --no-cache xvfb
 
 ENV DISPLAY :99
 
-# Install Xvfb init script
-ADD xvfb_init /etc/init.d/xvfb
-RUN chmod a+x /etc/init.d/xvfb
-ADD xvfb-daemon-run /usr/bin/xvfb-daemon-run
+ADD xvfb-daemon-run /usr/bin/xvfb-run
+RUN chmod a+x /usr/bin/xvfb-run
+RUN ln -s /usr/bin/xvfb-run /usr/bin/xvfb-daemon-run
 RUN chmod a+x /usr/bin/xvfb-daemon-run
 
-# delete cache
-RUN rm -rf /var/cache/*
-RUN rm -rf /var/lib/apt/lists/* 
-  
+ENTRYPOINT ["xvfb-run"]
