@@ -2,7 +2,7 @@ FROM java:8-jdk
 MAINTAINER Florian Schrag <florian@schrag.org>
 
 # add additional repo
-RUN apt-get update && apt-get install -y xvfb libxrender1 libxtst6 libxi6
+RUN apt-get update && apt-get install -y xvfb libxrender1 libxtst6 libxi6 openjfx
 
 ENV DISPLAY :99
 
